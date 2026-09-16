@@ -1,0 +1,1 @@
+echo $(cat filename.txt | tr ' ' '\n' | sort) > filename.txt
