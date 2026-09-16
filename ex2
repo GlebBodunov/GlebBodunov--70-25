@@ -1,0 +1,1 @@
+awk 'NF>=2 && $2 ~ /^[0-9]+$/ {print $2, $1}' protocols.txt | sort -rn | head -5
