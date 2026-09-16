@@ -1,0 +1,9 @@
+echo '#!/bin/bash' > banner
+echo 'text="$1"' >> banner
+echo 'len=${#text}' >> banner
+echo 'line=$(printf "%*s" $((len + 2)) "" | tr " " "-")' >> banner
+echo 'echo "+${line}+"' >> banner
+echo 'echo "| ${text} |"' >> banner
+echo 'echo "+${line}+"' >> banner
+chmod +x banner
+./banner "Hello from RTU MIREA!"
