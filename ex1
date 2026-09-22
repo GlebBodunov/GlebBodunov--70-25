@@ -1,1 +1,1 @@
-echo $(cat filename.txt | tr ' ' '\n' | sort) > filename.txt
+cut -d: -f1 /etc/passwd | sort
