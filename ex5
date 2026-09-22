@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+prog="$1"
+
+if [ -z "$prog" ] || [ ! -f "$prog" ]; then
+    echo "Использование: ./reg <имя_программы>"
+    exit 1
+fi
+
+chmod 755 "$prog"
+cp "$prog" /usr/local/bin/
