@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+path="$1"
+
+find "$path" -type f -exec md5sum {} \; | sort | uniq -w32 --all-repeated=separate -D
