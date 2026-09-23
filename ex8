@@ -1,1 +1,10 @@
+#!/usr/bin/env bash
+ext="$1"
 
+if [ -z "$ext" ]; then
+    echo "Использование: ./task8_archive.sh <расширение>"
+    exit 1
+fi
+
+find . -maxdepth 1 -type f -name "*.$ext" -print0 \
+    | tar --null -czvf "archive_$ext.tar.gz" --files-from -
