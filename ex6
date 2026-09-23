@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+for f in *.c *.js *.py; do
+    [ -e "$f" ] || continue
+
+    first_line=$(head -n 1 "$f")
+
+    case "$f" in
+        *.py)
+            comment_symbol="#"
+            ;;
+        *)
+            comment_symbol="//"
+            ;;
+    esac
+
+    case "$first_line" in
+        "$comment_symbol"*)
+            echo "$f: комментарий есть"
+            ;;
+        *)
+            echo "$f: комментария нет"
+            ;;
+    esac
+done
