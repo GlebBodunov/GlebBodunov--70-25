@@ -132,3 +132,69 @@ solve satisfy;
 
 output ["foo = \(foo)\nleft = \(left)\nright = \(right)\nshared = \(shared)\ntarget = \(target)\n"];
 ```
+
+## Task6
+```
+cd ~/pract2
+nano task7.py
+packages = {
+    "root":   {"1.0.0": {"foo": "^1.0.0", "target": "^2.0.0"}},
+    "foo":    {"1.1.0": {"left": "^1.0.0", "right": "^1.0.0"},
+               "1.0.0": {}},
+    "left":   {"1.0.0": {"shared": ">=1.0.0"}},
+    "right":  {"1.0.0": {"shared": "<2.0.0"}},
+    "shared": {"2.0.0": {},
+               "1.0.0": {"target": "^1.0.0"}},
+    "target": {"2.0.0": {},
+               "1.0.0": {}},
+}
+
+
+def num(version):
+    major, minor, patch = map(int, version.split("."))
+    return major * 10000 + minor * 100 + patch
+
+
+def fits(version, rule):
+    v = num(version)
+    if rule.startswith("^"):
+        low = num(rule[1:])
+        high = (low // 10000 + 1) * 10000
+        return low <= v < high
+    if rule.startswith(">="):
+        return v >= num(rule[2:])
+    if rule.startswith("<"):
+        return v < num(rule[1:])
+    return v == num(rule)
+
+
+lines = []
+
+for pkg, versions in packages.items():
+    domain = [num(v) for v in versions]
+    if pkg != "root":
+        domain.append(0)
+    lines.append(f"var {{{', '.join(map(str, sorted(domain)))}}}: {pkg};")
+
+for pkg, versions in packages.items():
+    for v, deps in versions.items():
+        for dep, rule in deps.items():
+            ok = [num(w) for w in packages[dep] if fits(w, rule)]
+            lines.append(f"constraint {pkg} = {num(v)} -> {dep} in {{{', '.join(map(str, ok))}}};")
+
+for pkg in packages:
+    if pkg == "root":
+        continue
+    who = [f"{p} = {num(v)}"
+           for p, versions in packages.items()
+           for v, deps in versions.items() if pkg in deps]
+    condition = " \\/ ".join(who) or "false"
+    lines.append(f"constraint {pkg} > 0 -> ({condition});")
+
+lines.append("solve satisfy;")
+lines.append("output [" + ", ".join(f'"{p} = \\({p})\\n"' for p in packages) + "];")
+
+print("\n".join(lines))
+
+python3 task7.py > task7.mzn
+```
