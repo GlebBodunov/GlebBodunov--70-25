@@ -17,7 +17,7 @@ ls matplotlib_git
 grep -A 12 "^dependencies" matplotlib_git/pyproject.toml
 ```
 
-## Task1
+## Task2
 
 ```mkdir ~/pract2/express_test && cd ~/pract2/express_test
 npm init -y
