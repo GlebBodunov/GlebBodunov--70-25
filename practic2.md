@@ -108,3 +108,27 @@ output ["menu = \(menu)\n",
         "dropdown = \(dropdown)\n",
         "icons = \(icons)\n"];
 ```
+
+## Task6
+```
+var {100, 110}: foo;
+var {0, 100}: left;
+var {0, 100}: right;
+var {0, 100, 200}: shared;
+var {100, 200}: target;
+
+constraint target = 200;
+
+constraint foo = 110 -> (left = 100 /\ right = 100);
+constraint left = 100 -> shared >= 100;
+constraint right = 100 -> shared = 100;
+constraint shared = 100 -> target = 100;
+
+constraint left > 0 -> foo = 110;
+constraint right > 0 -> foo = 110;
+constraint shared > 0 -> (left > 0 \/ right > 0);
+
+solve satisfy;
+
+output ["foo = \(foo)\nleft = \(left)\nright = \(right)\nshared = \(shared)\ntarget = \(target)\n"];
+```
