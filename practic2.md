@@ -88,3 +88,23 @@ solve minimize d[1] + d[2] + d[3];
 output ["Билет: \(d[1])\(d[2])\(d[3]) \(d[4])\(d[5])\(d[6])\n",
         "Сумма: \(d[1] + d[2] + d[3])\n"];
 ```
+
+## Task5
+```
+var {100, 110, 120, 130, 140, 150}: menu;
+var {180, 200, 210, 220, 230}: dropdown;
+var {100, 200}: icons;
+
+constraint icons = 100;
+
+constraint menu >= 110 -> dropdown >= 200;
+constraint menu = 100 -> dropdown = 180;
+
+constraint dropdown >= 200 -> icons = 200;
+
+solve satisfy;
+
+output ["menu = \(menu)\n",
+        "dropdown = \(dropdown)\n",
+        "icons = \(icons)\n"];
+```
