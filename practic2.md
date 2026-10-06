@@ -1,8 +1,8 @@
 # practic2
 
 ## Task1
-
-```mkdir ~/pract2 && cd ~/pract2
+```
+mkdir ~/pract2 && cd ~/pract2
 python3 -m venv venv
 source venv/bin/activate
 
@@ -18,8 +18,8 @@ grep -A 12 "^dependencies" matplotlib_git/pyproject.toml
 ```
 
 ## Task2
-
-```mkdir ~/pract2/express_test && cd ~/pract2/express_test
+```
+mkdir ~/pract2/express_test && cd ~/pract2/express_test
 npm init -y
 npm install express
 npm view express name version description license engines
