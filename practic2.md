@@ -32,3 +32,49 @@ git clone --depth 1 https://github.com/expressjs/express.git express_git
 ls express_git
 grep -A 29 '"dependencies"' express_git/package.json
 ```
+
+## Task3
+```
+cd ~/pract2
+brew install graphviz
+dot -V
+
+pip show contourpy python-dateutil | grep -E "^(Name|Requires):"
+
+cat > matplotlib.dot << 'EOF'
+digraph matplotlib {
+    rankdir=LR;
+    node [shape=box];
+    matplotlib -> contourpy;
+    matplotlib -> cycler;
+    matplotlib -> fonttools;
+    matplotlib -> kiwisolver;
+    matplotlib -> numpy;
+    matplotlib -> packaging;
+    matplotlib -> pillow;
+    matplotlib -> pyparsing;
+    matplotlib -> "python-dateutil";
+    contourpy -> numpy;
+    "python-dateutil" -> six;
+}
+EOF
+
+cat > express.dot << 'EOF'
+digraph express {
+    rankdir=LR;
+    node [shape=box];
+    express -> {
+        accepts "body-parser" "content-disposition" "content-type"
+        cookie "cookie-signature" debug depd encodeurl "escape-html"
+        etag finalhandler fresh "http-errors" "merge-descriptors"
+        "mime-types" "on-finished" once parseurl "proxy-addr" qs
+        "range-parser" router send "serve-static" statuses "type-is" vary
+    };
+}
+EOF
+
+dot -Tpng matplotlib.dot -o matplotlib.png
+dot -Tpng express.dot -o express.png
+open matplotlib.png express.png
+```
+
