@@ -36,6 +36,7 @@ grep -A 29 '"dependencies"' express_git/package.json
 ## Task3
 ```
 cd ~/pract2
+source venv/bin/activate
 brew install graphviz
 dot -V
 
@@ -45,15 +46,10 @@ cat > matplotlib.dot << 'EOF'
 digraph matplotlib {
     rankdir=LR;
     node [shape=box];
-    matplotlib -> contourpy;
-    matplotlib -> cycler;
-    matplotlib -> fonttools;
-    matplotlib -> kiwisolver;
-    matplotlib -> numpy;
-    matplotlib -> packaging;
-    matplotlib -> pillow;
-    matplotlib -> pyparsing;
-    matplotlib -> "python-dateutil";
+    matplotlib -> {
+        contourpy cycler fonttools kiwisolver numpy
+        packaging pillow pyparsing "python-dateutil"
+    };
     contourpy -> numpy;
     "python-dateutil" -> six;
 }
