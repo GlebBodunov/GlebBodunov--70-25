@@ -74,3 +74,17 @@ dot -Tpng express.dot -o express.png
 open matplotlib.png express.png
 ```
 
+## Task4
+```
+include "globals.mzn";
+
+array[1..6] of var 0..9: d;
+
+constraint all_different(d);
+constraint d[1] + d[2] + d[3] = d[4] + d[5] + d[6];
+
+solve minimize d[1] + d[2] + d[3];
+
+output ["Билет: \(d[1])\(d[2])\(d[3]) \(d[4])\(d[5])\(d[6])\n",
+        "Сумма: \(d[1] + d[2] + d[3])\n"];
+```
