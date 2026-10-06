@@ -16,3 +16,19 @@ git clone --depth 1 https://github.com/matplotlib/matplotlib.git matplotlib_git
 ls matplotlib_git
 grep -A 12 "^dependencies" matplotlib_git/pyproject.toml
 ```
+
+## Task1
+
+```mkdir ~/pract2/express_test && cd ~/pract2/express_test
+npm init -y
+npm install express
+npm view express name version description license engines
+
+ls node_modules/express
+grep -A 29 '"dependencies"' node_modules/express/package.json
+
+cd ~/pract2
+git clone --depth 1 https://github.com/expressjs/express.git express_git
+ls express_git
+grep -A 29 '"dependencies"' express_git/package.json
+```
